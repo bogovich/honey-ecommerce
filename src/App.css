@@ -51,6 +51,7 @@
 .nav__row a {
   text-decoration: none;
   color: inherit;
+  display: inline-block;
 }
 
 .nav__top {
@@ -120,6 +121,13 @@
 
   position: relative;
   transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.nav__logo {
+  background: url(/src/assets/opg_logo.png) no-repeat left top;
+  background-size: contain;
+  height: 50px;
+  width: 50px;
 }
 
 .nav__row-cart:hover {
