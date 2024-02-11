@@ -1,6 +1,6 @@
 import './App.css'
 import NavBar from './components/NavBar'
-
+import Landing from './pages/Landing'
 function App() {
 
   return (
@@ -9,7 +9,7 @@ function App() {
         <NavBar />
       </header>
       <main className="main">
-        <h1>Honey</h1>
+        <Landing />
       </main>
     </>
   )
