@@ -1,8 +1,19 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
+import { useEffect } from "react";
 import { Landing, Cart, Contact, Shop, Login, Register } from "./pages";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchProducts } from "./redux/slices/productSlice";
+import { fetchCategories} from "./redux/slices/categorySlice";
 function App() {
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+    dispatch(fetchCategories())
+  }, [dispatch])
   return (
     <>
       <header className="App-header">
