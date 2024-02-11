@@ -36,9 +36,9 @@ const NavBar = () => {
         </div>
         <div className="nav__row-group">
           <div className="nav__row-item">
-            <a href="/login"> Login</a>
+            <Link to="/login"> Login</Link>
             <FontAwesomeIcon icon={faUser} />
-            <a href="/register"> Register</a>
+            <Link to="/register"> Register</Link>
           </div>
         </div>      
       </div>
