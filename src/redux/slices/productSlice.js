@@ -21,12 +21,10 @@ const getProductData = async () => {
     const productsArray = await Promise.all(data.docs.map(async (doc) => {
         const docData = doc.data();
         return {
-            id: doc.id,
-            data: {
                 ...docData,
+                id: doc.id,
                 created_at: docData.created_at.toDate().toISOString(),
                 category: await getCategoryData(docData.category) 
-            },
         }
     }));
     return productsArray;
