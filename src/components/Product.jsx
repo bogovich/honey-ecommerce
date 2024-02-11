@@ -5,19 +5,18 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { addToCart } from '../redux/slices/cartSlice';
+import {Link} from 'react-router-dom';
 
 
 
 const Product = ({product}) => {
-    const { images, title, packaging, description, price } = product;
+    const { id, images, title, packaging, description, price } = product;
     const dispatch = useDispatch();
-    const cart = useSelector(state => state.cartReducer.cart);
 
     const handleAdd = () => {
         dispatch(addToCart(product));
-        console.log(cart);
     }
 
     return (
@@ -46,7 +45,7 @@ const Product = ({product}) => {
             </CardContent>
             <CardActions>
               <Button size="small" onClick={handleAdd}>Add to Cart</Button>
-              <Button size="small">Learn More</Button>
+              <Link to={`/products/${id}`}><Button size="small">Learn More</Button></Link>
             </CardActions>
         </Card>
     );

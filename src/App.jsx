@@ -6,6 +6,7 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/slices/productSlice";
 import { fetchCategories} from "./redux/slices/categorySlice";
+import ProductPage from "./components/ProductPage";
 function App() {
   const dispatch = useDispatch();
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/shop" element={<Shop />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/products/:id" element={<ProductPage />} />
         </Routes>
       </main>
     </>
