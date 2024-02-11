@@ -1,17 +1,17 @@
 import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faShoppingCart,
   faUser,
   faPhone,
   faEnvelope,
   faAngleDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-
-
+import CartDropdown from "./CartDropdown";
 
 const NavBar = () => {
+
+
   return (
     <nav className="nav">
       <div className="nav__row nav__top">
@@ -40,7 +40,7 @@ const NavBar = () => {
             <FontAwesomeIcon icon={faUser} />
             <Link to="/register"> Register</Link>
           </div>
-        </div>      
+        </div>
       </div>
       <div className="nav__row nav__bottom">
         <div className="nav__row-group">
@@ -50,26 +50,25 @@ const NavBar = () => {
           </div>
           <div className="nav__row-item nav__row-nav-item">
             <Link to="/shop">Products</Link>
-            <FontAwesomeIcon className="nav__row-item-icon" icon={faAngleDown} />
+            <FontAwesomeIcon
+              className="nav__row-item-icon"
+              icon={faAngleDown}
+            />
           </div>
           <div className="nav__row-item nav__row-nav-item">
             Information
-            <FontAwesomeIcon className="nav__row-item-icon" icon={faAngleDown} />
+            <FontAwesomeIcon
+              className="nav__row-item-icon"
+              icon={faAngleDown}
+            />
           </div>
         </div>
         <div className="nav__row-group">
           <SearchBar />
         </div>
         <div className="nav__row-group">
-        <div className="nav__row-item nav__row-cart">
-          <Link to="/cart" className="nav__row-cart-link">
-            <span className="nav__row-cart-quantity">1</span>
-            <FontAwesomeIcon icon={faShoppingCart} size="lg"/>
-            
-          </Link>
-          </div>
+          <CartDropdown />
         </div>
-        
       </div>
     </nav>
   );
