@@ -1,19 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {collection, query, orderBy, getDoc, getDocs} from "firebase/firestore";
+import {collection, query, orderBy, getDocs} from "firebase/firestore";
 import {db} from '../../firebase';
-
-const getCategoryData = async (docRef) => {
-    try {
-        const data = await getDoc(docRef);
-        return data.data().name;
-    } catch (err) {
-        return {
-            "en": "Category not found",
-            "hr": "Kategorija nije pronađena"
-        }
-    }
-}
-
 
 const getProductData = async () => {
     const q = query(collection(db, "products"), orderBy("created_at", "desc"));
@@ -24,7 +11,7 @@ const getProductData = async () => {
                 ...docData,
                 id: doc.id,
                 created_at: docData.created_at.toDate().toISOString(),
-                category: await getCategoryData(docData.category) 
+                category: {id: docData.category.id},
         }
     }));
     return productsArray;
@@ -66,3 +53,4 @@ const productSlice = createSlice({
 })
 
 export default productSlice.reducer
+export const selectProducts = state => state.productReducer.products;

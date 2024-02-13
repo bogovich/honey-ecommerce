@@ -1,16 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {collection, query, orderBy, getDocs} from "firebase/firestore";
+import {collection, query, getDocs} from "firebase/firestore";
 import {db} from '../../firebase';
 
-const getProductData = async () => {
-    const q = query(collection(db, "categories"), orderBy("created_at", "desc"));
+const getCategoryData = async () => {
+    const q = query(collection(db, "categories"));
     const data = await getDocs(q);
-    const categoriesArray = data.docs.map(async (doc) => {
+    const categoriesArray = await Promise.all(data.docs.map(async (doc) => {
         return {
             id: doc.id,
-            data: doc.data()
+            ...doc.data()
         }
-    });
+    }));
     return categoriesArray;
 }
 
@@ -18,7 +18,7 @@ export const fetchCategories = createAsyncThunk(
     'categories/fetchCategories',
     async () => {
       try {
-        const response = await getProductData();
+        const response = await getCategoryData();
         return response;
       } catch (error) {
         throw Error(error);
@@ -50,3 +50,4 @@ const categorySlice = createSlice({
 })
 
 export default categorySlice.reducer
+export const selectCategories = (state) => state.categoryReducer.categories;

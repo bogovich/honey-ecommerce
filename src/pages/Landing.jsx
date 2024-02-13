@@ -2,10 +2,11 @@
 import Product from '../components/Product'
 import Hero from '../components/Hero'
 import { useSelector } from 'react-redux'
+import { selectFeaturedProducts } from '../redux/selectors'
 
 const Landing = () => {
-    const products = useSelector(state => state.productReducer.products);
-    const featuredProducts = products.filter((product) => product.featured === true);
+    const featuredProducts = useSelector(selectFeaturedProducts);
+    console.log(featuredProducts);
 
     return (
         <>
