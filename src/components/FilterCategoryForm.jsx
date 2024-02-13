@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const FilterCategoryForm = ({ filter, setFilter, title }) => {
   return (
-    <form>
+    <form className="filters__form">
       <h2>{title}</h2>
       {filter &&
         filter.map((item) => {

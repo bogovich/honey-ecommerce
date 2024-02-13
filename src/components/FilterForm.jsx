@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 const FilterForm = ({ filter, setFilter, title }) => (
-  <form>
+  <form className="filters__form">
     <h2>{title}</h2>
     {Object.keys(filter).map((key) => {
       return (
