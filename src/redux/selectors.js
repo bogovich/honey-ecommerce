@@ -19,7 +19,7 @@ export const selectFeaturedProducts = createSelector(
 );
 
 export const selectFilteredProducts = createSelector(
-    [selectProducts, selectFilters],
+    [selectProductsWCategories, selectFilters],
     (products, filters) => {
       return products.filter((product) => {
         const packagingValues = Object.keys(filters.packaging).filter(

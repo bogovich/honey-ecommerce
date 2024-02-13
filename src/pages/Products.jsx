@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { addToCart } from "../redux/slices/cartSlice";
 import { useEffect } from "react";
 import {
   selectProductsWCategories,
@@ -67,6 +66,10 @@ const Products = () => {
 
   }, [categorySlug, categories, dispatch]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handlePackagingFilterChange = (newFilter) => {
     dispatch(setPackagingFilter(newFilter));
   };
@@ -77,10 +80,6 @@ const Products = () => {
 
   const handleCategoryFilterChange = (newFilter) => {
     dispatch(setCategoryFilter(newFilter));
-  };
-
-  const handleAdd = (product) => {
-    dispatch(addToCart(product));
   };
 
   return (
@@ -110,7 +109,6 @@ const Products = () => {
             <Product
               key={filteredProduct.id}
               product={filteredProduct}
-              handleAdd={handleAdd}
             />
           );
         })}

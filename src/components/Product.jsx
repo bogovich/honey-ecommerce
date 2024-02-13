@@ -13,7 +13,7 @@ import { slugify } from '../utils';
 
 
 const Product = ({product}) => {
-    const { id, images, title, packaging, description, price } = product;
+    const { id, category, images, title, packaging, description, price } = product;
     const dispatch = useDispatch();
 
     const handleAdd = () => {
@@ -21,7 +21,9 @@ const Product = ({product}) => {
     }
 
 
-    const slug = slugify(title.en);
+    const nameSlug = slugify(title.en);
+    const categorySlug = slugify(category.name?.en) || 'all';
+    const packagingSlug = slugify(packaging.en);
 
     return (
         <Card sx={{ width: 250, maxWidth: 250 }}>
@@ -49,7 +51,7 @@ const Product = ({product}) => {
             </CardContent>
             <CardActions>
               <Button size="small" onClick={handleAdd}>Add to Cart</Button>
-              <Link to={`/${slug}-${id}`}><Button size="small">Learn More</Button></Link>
+              <Link to={`/products/${categorySlug}/${nameSlug}-${packagingSlug}-${id}`}><Button size="small">Learn More</Button></Link>
             </CardActions>
         </Card>
     );
