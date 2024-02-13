@@ -34,8 +34,12 @@ const cartSlice = createSlice({
         addToCart: (state, action) => {
             const itemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
             if(itemIndex >= 0) {
+                let addedQuantity;
+                Object.prototype.hasOwnProperty.call(action.payload, "amount")
+                  ? (addedQuantity = action.payload.amount)
+                  : (addedQuantity = 1);
                 state.cart = state.cart.map((item, index) => {
-                    return index === itemIndex ? {...item, quantity: item.quantity + 1} : item;
+                    return index === itemIndex ? {...item, quantity: item.quantity + addedQuantity} : item;
                 })
             } else {
                 state.cart = [...state.cart, {
