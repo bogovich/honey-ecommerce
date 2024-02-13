@@ -1,3 +1,6 @@
+import './Hero.css'
+import { Link } from 'react-router-dom'
+
 
 const Hero = () => {
 
@@ -9,7 +12,7 @@ const Hero = () => {
                   <img src="https://source.unsplash.com/zuj7kbZNcUk" />
               </div>
               <a className="hero__button hero__button-products">Find more about our area!</a>
-              <a className="hero__button hero__button-locality">Check out our products!</a>
+              <Link to="/products" className="hero__button hero__button-locality">Check out our products!</Link>
           </div>
         </section>
     );

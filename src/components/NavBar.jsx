@@ -8,9 +8,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import CartDropdown from "./CartDropdown";
+import { useSelector } from "react-redux";
+import { slugify } from "../utils";
+import "./NavBar.css"
 
 const NavBar = () => {
-
+  const categories = useSelector((state) => state.categoryReducer.categories);
 
   return (
     <nav className="nav">
@@ -54,6 +57,18 @@ const NavBar = () => {
               className="nav__row-item-icon"
               icon={faAngleDown}
             />
+            <ul className="nav__dropdown">
+              <li>
+                <Link to="/products">All products</Link>
+              </li>
+              {categories.map((category) => (
+                <li key={category.id}>
+                  <Link to={`/products/${slugify(category.name.en)}`}>
+                    {category.name.en}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
           <div className="nav__row-item nav__row-nav-item">
             Information
@@ -61,6 +76,23 @@ const NavBar = () => {
               className="nav__row-item-icon"
               icon={faAngleDown}
             />
+            <ul className="nav__dropdown">
+              <li>
+                <Link to="/about-us">About us</Link>
+              </li>
+              <li>
+                <Link to="/about-area">About our area</Link>
+              </li>
+              <li>
+                <Link to="/delivery">Delivery</Link>
+              </li>
+              <li>
+                <Link to="/faq">FAQ</Link>
+              </li>
+              <li>
+                <Link to="/contact">Contact</Link>
+              </li>
+            </ul>
           </div>
         </div>
         <div className="nav__row-group">
