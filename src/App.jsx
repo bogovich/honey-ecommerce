@@ -1,12 +1,13 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
 import { useEffect } from "react";
-import { Landing, Cart, Contact, Products, Login, Register } from "./pages";
+import { Landing, Cart, Contact, Products, Login, Register, NotFound } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/slices/productSlice";
 import { fetchCategories} from "./redux/slices/categorySlice";
-import ProductPage from "./components/ProductPage";
+import ProductPage from "./pages/ProductPage";
+import Breadcrumbs from "./components/Breadcrumbs";
 function App() {
   const dispatch = useDispatch();
 
@@ -21,15 +22,17 @@ function App() {
         <NavBar />
       </header>
       <main className="main">
+        <Breadcrumbs />
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/products/" element={<Products />} />
+          <Route path="/products/:categorySlug/:productSlugAndId" element={<ProductPage />} />
           <Route path="/products/:categorySlug" element={<Products />} />
+          <Route path="/products/" element={<Products />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/:productSlugAndId" element={<ProductPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </>
