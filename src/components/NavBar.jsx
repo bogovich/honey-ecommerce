@@ -49,7 +49,7 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </div>
           <div className="nav__row-item nav__row-nav-item">
-            <Link to="/shop">Products</Link>
+            <Link to="/products">Products</Link>
             <FontAwesomeIcon
               className="nav__row-item-icon"
               icon={faAngleDown}

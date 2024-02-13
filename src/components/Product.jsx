@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import {useDispatch} from 'react-redux';
 import { addToCart } from '../redux/slices/cartSlice';
 import {Link} from 'react-router-dom';
+import { slugify } from '../utils';
 
 
 
@@ -18,6 +19,9 @@ const Product = ({product}) => {
     const handleAdd = () => {
         dispatch(addToCart(product));
     }
+
+
+    const slug = slugify(title.en);
 
     return (
         <Card sx={{ width: 250, maxWidth: 250 }}>
@@ -45,7 +49,7 @@ const Product = ({product}) => {
             </CardContent>
             <CardActions>
               <Button size="small" onClick={handleAdd}>Add to Cart</Button>
-              <Link to={`/products/${id}`}><Button size="small">Learn More</Button></Link>
+              <Link to={`/${slug}-${id}`}><Button size="small">Learn More</Button></Link>
             </CardActions>
         </Card>
     );
