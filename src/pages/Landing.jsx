@@ -6,7 +6,6 @@ import { selectFeaturedProducts } from '../redux/selectors'
 
 const Landing = () => {
     const featuredProducts = useSelector(selectFeaturedProducts);
-    console.log(featuredProducts);
 
     return (
         <>
