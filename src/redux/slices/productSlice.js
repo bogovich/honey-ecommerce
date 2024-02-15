@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import {collection, query, orderBy, getDocs} from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from 'firebase/firestore/lite';
 import {db} from '../../firebase';
 
 const getProductData = async () => {
