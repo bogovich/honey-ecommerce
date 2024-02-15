@@ -1,7 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faShoppingCart,
-} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../redux/slices/cartSlice";
@@ -11,6 +9,7 @@ const CartDropdown = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
+  const totalWDelivery = Math.round((total + 5)*100)/100;
   const cartQuantity = cart.length;
 
   const handleRemove = (item) => {
@@ -19,19 +18,33 @@ const CartDropdown = () => {
 
   return (
     <div
-      className={`nav__row-item nav__row-cart ${
+      className={`nav__row-item nav__cart ${
         cartQuantity > 0 ? "active" : ""
       }`}
     >
-      <Link to="/cart" className="nav__row-cart-link">
-        <span className="nav__row-cart-quantity">{cartQuantity}</span>
+      <Link to="/cart" className="nav__cart-link">
+        <span className="nav__cart-quantity">{cartQuantity}</span>
         <FontAwesomeIcon icon={faShoppingCart} size="lg" />
       </Link>
-      <div className="nav__row-cart-display">
-        {cart.map((item) => (
-          <CartDropdownItem key={item.id} item={item} handleRemove={handleRemove} />
-        ))}
-        <h3>Total - {total}€</h3>
+      <div className="nav__cart-display">
+        <div className="nav__cart-display-items">
+          {cart.map((item) => (
+            <CartDropdownItem
+              key={item.id}
+              item={item}
+              handleRemove={handleRemove}
+            />
+          ))}
+        </div>
+        <div className="nav__cart-display-total">
+          <span>Products:</span><span>{total}€</span>
+          <span>Delivery:</span><span>5.00€</span>
+          <span><strong>Total:</strong></span><span><strong>{totalWDelivery}€</strong></span>
+        </div>
+        <div className="nav__cart-display-actions">
+          <Link className="nav__cart-action-btn btn-cart" to="/cart">View Cart</Link>
+          <Link className="nav__cart-action-btn btn-checkout" to="/checkout">Checkout</Link>
+        </div>
       </div>
     </div>
   );

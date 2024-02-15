@@ -1,21 +1,49 @@
-import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faXmarkCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { Link } from "react-router-dom";
+import { slugify } from '../utils';
 import PropTypes from "prop-types";
 
-const CartDropdownItem = ({ item, handleRemove }) => (
-  <div key={item.id} className="nav__row-cart-item">
-    <img src={item.images[1]} alt={item.title.en} />
-    <div className="nav__row-cart-item-info">
-      <h4>{item.title.en}</h4>
-      <p>{item.price}€</p>
-      <button onClick={() => handleRemove(item)}>
-        Remove
-        <FontAwesomeIcon icon={faXmarkCircle} size="lg" />
-      </button>
+const CartDropdownItem = ({ item, handleRemove }) => {
+  const nameSlug = slugify(item.title.en);
+  const categorySlug = slugify(item.category.name?.en) || 'all';
+  const packagingSlug = slugify(item.packaging.en);
+  
+
+  const productLink = `/products/${categorySlug}/${nameSlug}-${packagingSlug}-${item.id}`;
+
+  return (
+    <div key={item.id} className="nav__cart-item">
+      <Link to={productLink}>
+        <img
+          className="nav__cart-item-image"
+          src={item.images[1]}
+          alt={item.title.en}
+        />
+      </Link>
+
+      <div className="nav__cart-item__info">
+        <Link to={productLink}>
+          <h4 className="nav__cart-item__title">
+            {item.title.en}
+            {item.category.name.en !== "Gift Packages" ? ` - ${item.packaging.en}` : ""}
+          </h4>
+        </Link>
+        <p className="nav__cart-item__price">
+          {item.quantity}
+          <FontAwesomeIcon icon={faXmark} size="sm" />
+          {item.price}€
+        </p>
+        <span
+          className="nav__cart-item-remove"
+          onClick={() => handleRemove(item)}
+        >
+          <FontAwesomeIcon icon={faXmarkCircle} size="lg" />
+        </span>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 CartDropdownItem.propTypes = {
   item: PropTypes.object.isRequired,

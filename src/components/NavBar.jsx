@@ -37,13 +37,13 @@ const NavBar = () => {
             </a>
           </div>
         </div>
-        <div className="nav__row-group">
+        {/* <div className="nav__row-group">
           <div className="nav__row-item">
             <Link to="/login"> Login</Link>
             <FontAwesomeIcon icon={faUser} />
             <Link to="/register"> Register</Link>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="nav__row nav__bottom">
         <div className="nav__row-group">
