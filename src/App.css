@@ -428,12 +428,6 @@
   gap: 0.5rem;
 }
 
-.product-page__add-to-cart {
-  width: 350px;
-  font-size: 1.3rem;
-  height: 50px;
-}
-
 .product-page .image-gallery {
   width: 35%;
   height: 500px;
@@ -611,4 +605,24 @@
 .product__add-btn {
   height: 30px;
   margin-top: auto;
+}
+
+.product-page .product__add-btn {
+  width: 350px;
+  font-size: 1.3rem;
+  height: 50px;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 350px;
+}
+
+.form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }

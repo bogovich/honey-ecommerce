@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ImageGallery from "react-image-gallery";
 import { useMemo } from "react";
-import { QuantitySelect } from "../components";
+import { QuantitySelect, AddToCartButton } from "../components";
 import { addToCart } from "../redux/slices/cartSlice";
 
 import { selectProductsWCategories } from "../redux/selectors";
@@ -17,7 +17,6 @@ const ProductPage = () => {
   const parts = productSlugAndId.split("-");
   const id = parts.pop();
   const thisProduct = products.filter((product) => product.id === id)[0];
-  console.log(thisProduct);
   const images = useMemo(() => {
     return thisProduct
       ? thisProduct.images.map((image) => ({
@@ -42,10 +41,6 @@ const ProductPage = () => {
 
   const handleQuantityChange = (amount) => {
     setQuantity((prev) => prev + amount);
-  };
-
-  const handleAddToCart = () => {
-    dispatch(addToCart({ ...thisProduct, amount: quantity }));
   };
 
   return (
@@ -88,13 +83,17 @@ const ProductPage = () => {
               quantity={quantity}
               handleChange={handleQuantityChange}
             />
-            <button
+            {/* <button
               className="btn-primary product-page__add-to-cart"
               onClick={handleAddToCart}
             >
               {" "}
               Add to cart
-            </button>
+            </button> */}
+            <AddToCartButton
+              product={thisProduct}
+              quantity={quantity}
+            />
           </div>
         </div>
       </div>

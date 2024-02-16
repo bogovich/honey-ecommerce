@@ -1,16 +1,10 @@
 import { PropTypes } from "prop-types";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 import { slugify } from "../utils";
+import AddToCartButton from "./AddToCartButton";
 
 const Product = ({ product }) => {
   const { id, category, images, title, packaging, price } = product;
-  const dispatch = useDispatch();
-
-  const handleAdd = () => {
-    dispatch(addToCart(product));
-  };
 
   if(product.category === undefined) return null;
 
@@ -37,9 +31,7 @@ const Product = ({ product }) => {
 
       <div className="product__add">
         <span className="product__price">{price}€</span>
-        <button className="product__add-btn btn-primary" onClick={handleAdd}>
-          Add to cart
-        </button>
+        <AddToCartButton product={product} />
       </div>
     </div>
   );
