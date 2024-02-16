@@ -3,7 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { selectProductsWCategories } from "../redux/selectors";
@@ -128,6 +128,11 @@ const SearchBar = () => {
     }
   };
 
+  const handleClose = () => {
+    setSearchTerm("");
+    setSearchResults([]);
+  }
+
   return (
     <Search>
       <SearchIconWrapper>
@@ -152,11 +157,16 @@ const SearchBar = () => {
         }
       />
       {searchResults.length > 0 && (
-        <div className="nav__search-dropdown" ref={dropdownRef}>
-          {searchResults.map((result) => (
-            <SearchDropdownItem key={result.id} item={result} />
-          ))}
-        </div>
+        <>
+          <div className="nav__search-dropdown" ref={dropdownRef}>
+            {searchResults.map((result) => (
+              <SearchDropdownItem key={result.id} item={result} />
+            ))}
+          </div>
+          <span className="nav__search-dropdown__close" onClick={handleClose}>
+            <FontAwesomeIcon icon={faXmark} size="lg" />
+          </span>
+        </>
       )}
     </Search>
   );
