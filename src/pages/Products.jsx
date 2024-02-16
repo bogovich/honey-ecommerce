@@ -85,21 +85,22 @@ const Products = () => {
   return (
     <section className="products-section">
       <div className="filters">
+        <h1>Filters</h1>
         <FilterForm
           filter={filters.packaging}
           setFilter={handlePackagingFilterChange}
-          title="Filter by Packaging"
+          title="Packaging"
         />
         <FilterForm
           filter={filters.honeyType}
           setFilter={handleHoneyTypeFilterChange}
-          title="Filter by Honey Type"
+          title="Honey Type"
         />
         {!categorySlug && (
           <FilterCategoryForm
             filter={filters.category}
             setFilter={handleCategoryFilterChange}
-            title="Filter by Category"
+            title="Category"
           />
         )}
       </div>
