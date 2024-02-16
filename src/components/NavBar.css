@@ -13,6 +13,7 @@
     gap: 20px;
     padding: 0;
     height: 100%;
+    flex-shrink: 0;
 }
 
 .nav__bottom .nav__row-group {
@@ -24,6 +25,7 @@
     align-items: center;
     color: inherit;
     gap: 0.5rem;
+    transition: color 0.3s;
 }
 
 .nav__bottom .nav__row-item {
@@ -52,6 +54,7 @@
     text-decoration: none;
     color: inherit;
     display: flex;
+    flex-shrink: 0;
 }
 
 .nav__top {
@@ -65,6 +68,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.nav__top .nav__row-item:hover {
+    color: var(--primary-orange);
 }
 
 .nav__bottom {
@@ -91,14 +98,6 @@
     align-items: center;
     cursor: pointer;
     gap: 0.35rem;
-}
-
-
-
-.products {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
 }
 
 .nav__cart {

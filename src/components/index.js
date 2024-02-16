@@ -6,3 +6,5 @@ export { default as Hero } from './Hero';
 export { default as NavBar } from './NavBar';
 export { default as Product } from './Product';
 export { default as SearchBar } from './SearchBar';
+export { default as CartItem } from './CartItem';
+export { default as QuantitySelect } from './QuantitySelect';

@@ -1,4 +1,5 @@
  @import "reset.css";
+ @import "react-image-gallery/styles/css/image-gallery.css";
 
 :root {
   font-family: 'Roboto', sans-serif;
@@ -14,10 +15,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --nav-height: 60px;
-  --site-padding: 7vw;
+  --nav-height: 90px;
+  --site-padding: 10vw;
   --color-text: #e7e5e5;
   --primary-orange: #ff7b00;
+  --primary-orange-dark: #d96900;
 }
 /*
 a {
