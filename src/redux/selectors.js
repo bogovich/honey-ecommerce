@@ -35,6 +35,9 @@ export const selectFilteredProducts = createSelector(
         const isPackagingMatch =
           packagingValues.length === 0 ||
           packagingValues.includes(product.packaging.en);
+        const isNameMatch =
+          filters.name.length === 0 ||
+          product.title.en.toLowerCase().includes(filters.name.toLowerCase());
         const isPriceMatch =
           product.price >= filters.price.min &&
           product.price <= filters.price.max;
@@ -50,7 +53,8 @@ export const selectFilteredProducts = createSelector(
           isPackagingMatch &&
           isPriceMatch &&
           isHoneyTypeMatch &&
-          isCategoryMatch
+          isCategoryMatch &&
+          isNameMatch
         );
       });
     }

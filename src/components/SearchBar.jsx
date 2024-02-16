@@ -4,6 +4,11 @@ import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { selectProductsWCategories } from "../redux/selectors";
+import { useNavigate } from "react-router-dom";
+import SearchDropdownItem from "./SearchDropdownItem";
 
 const StyledInputAdornment = styled(InputAdornment)({
   position: "absolute",
@@ -29,7 +34,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: "#ff7b00"
+  color: "#ff7b00",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -65,22 +70,96 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const SearchBar = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const products = useSelector(selectProductsWCategories);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 500);
+    return () => {
+      clearTimeout(timerId);
+    };
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (debouncedSearchTerm.length > 1) {
+      const results = products.filter((product) =>
+        product.title.en
+          .toLowerCase()
+          .includes(debouncedSearchTerm.toLowerCase())
+      );
+      setSearchResults(results);
+    } else {
+      setSearchResults([]);
+    }
+  }, [debouncedSearchTerm, products]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setSearchResults([]);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    setSearchTerm("");
+    navigate(`/products/search?name=${searchTerm}`);
+  };
+
+  const handleKeySearch = (event) => {
+    if (event.key === "Enter") {
+      setSearchTerm("");
+      navigate(`/products/search?name=${searchTerm}`);
+    }
+  };
+
   return (
     <Search>
-    <SearchIconWrapper>
-      <FontAwesomeIcon icon={faSearch} size="lg" />
-    </SearchIconWrapper>
-    <StyledInputBase
-      placeholder="Search…"
-      inputProps={{ "aria-label": "search" }}
-      endAdornment={
-        <StyledInputAdornment position="end">
-          <StyledButton variant="contained" color="primary">SEARCH</StyledButton>
-        </StyledInputAdornment>
-      }
-    />
-  </Search>
-  )
-  }
+      <SearchIconWrapper>
+        <FontAwesomeIcon icon={faSearch} size="lg" />
+      </SearchIconWrapper>
+      <StyledInputBase
+        placeholder="Search…"
+        inputProps={{ "aria-label": "search" }}
+        value={searchTerm}
+        onChange={handleSearchChange}
+        onKeyDown={handleKeySearch}
+        endAdornment={
+          <StyledInputAdornment position="end">
+            <StyledButton
+              variant="contained"
+              color="primary"
+              onClick={handleSearchSubmit}
+            >
+              SEARCH
+            </StyledButton>
+          </StyledInputAdornment>
+        }
+      />
+      {searchResults.length > 0 && (
+        <div className="nav__search-dropdown" ref={dropdownRef}>
+          {searchResults.map((result) => (
+            <SearchDropdownItem key={result.id} item={result} />
+          ))}
+        </div>
+      )}
+    </Search>
+  );
+};
 
 export default SearchBar;

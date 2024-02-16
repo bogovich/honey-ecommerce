@@ -21,7 +21,18 @@ const CustomBreadCrumbs = () => {
         const thisProduct = products.filter((product) => product.id === id)[0];
         return thisProduct ? thisProduct.title.en : null;
       },
-    },
+    },  
+    {
+      path: "/products/search",
+      breadcrumb: ({ location }) => {
+        if (isLoading) {
+          return null;
+        }
+        const params = new URLSearchParams(location.search);
+        const name = params.get('name');
+        return name ? `Search results for: ${name}` : null;
+      },
+    }
   ];
   const breadcrumbs = useBreadcrumbs(routes);
   const boobbubmp = breadcrumbs.map(({ match, breadcrumb }) => {

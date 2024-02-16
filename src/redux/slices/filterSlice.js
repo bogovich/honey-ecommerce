@@ -6,6 +6,7 @@ const filtersSlice = createSlice({
     packaging: {},
     honeyType: {},
     category: [],
+    name: "",
     price: {
       min: 0,
       max: 100,
@@ -21,6 +22,9 @@ const filtersSlice = createSlice({
     setCategoryFilter: (state, action) => {
       state.category = action.payload;
     },
+    setNameFilter: (state, action) => {
+      state.name = action.payload
+    },
     setPriceFilter: (state, action) => {
       state.price = action.payload;
     },
@@ -32,6 +36,7 @@ export const {
   setHoneyTypeFilter,
   setCategoryFilter,
   setPriceFilter,
+  setNameFilter,
 } = filtersSlice.actions;
 
 export default filtersSlice.reducer;

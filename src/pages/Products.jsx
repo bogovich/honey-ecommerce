@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import {
   selectProductsWCategories,
@@ -10,6 +10,7 @@ import {
   setHoneyTypeFilter,
   setCategoryFilter,
   setPriceFilter,
+  setNameFilter,
 } from "../redux/slices/filterSlice";
 import { getUniqueValues, slugify } from "../utils";
 import { Product, FilterForm, FilterCategoryForm } from "../components";
@@ -21,6 +22,12 @@ const Products = () => {
   const filters = useSelector((state) => state.filterReducer);
   const categories = useSelector((state) => state.categoryReducer.categories);
   const { categorySlug } = useParams();
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("name");
+
+  useEffect(() => {
+    dispatch(setNameFilter(search || ""));
+  }, [search, dispatch]);
 
   useEffect(() => {
     if (products.length > 0) {
