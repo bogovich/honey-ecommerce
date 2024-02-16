@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { roundToTwoDecimals } from "../../utils";
 const saveState = (state) => {
     try {
         const localState = JSON.stringify(state);
@@ -33,29 +33,31 @@ const cartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             const itemIndex = state.cart.findIndex((item) => item.id === action.payload.id);
+            const addedQuantity = action.payload.amount || 1;
             if(itemIndex >= 0) {
-                let addedQuantity;
-                Object.prototype.hasOwnProperty.call(action.payload, "amount")
-                  ? (addedQuantity = action.payload.amount)
-                  : (addedQuantity = 1);
                 state.cart = state.cart.map((item, index) => {
                     return index === itemIndex ? {...item, quantity: item.quantity + addedQuantity} : item;
                 })
             } else {
                 state.cart = [...state.cart, {
                     ...action.payload,
-                    quantity: 1
+                    quantity: addedQuantity
                 }]
             }
-            state.total = Math.round(state.cart.reduce((total, item) => total + (item.price * item.quantity), 0) * 100) / 100;
+            state.total = roundToTwoDecimals(state.cart.reduce((total, item) => total + (item.price * item.quantity), 0));
             saveState(state);
         },
         removeFromCart: (state, action) => {
+            state.cart = state.cart.filter((item) => item.id !== action.payload.id);
+            state.total = roundToTwoDecimals(state.cart.reduce((total, item) => total + (item.price * item.quantity), 0));
+
+            saveState(state);
+        },
+        updateQuantity: (state, action) => {
             state.cart = state.cart.map((item) => {
-                return item.id === action.payload.id ? {...item, quantity: item.quantity - 1} : item
+                return item.id === action.payload.id ? {...item, quantity: action.payload.quantity} : item
             })
-            state.cart = state.cart.filter(item => item.quantity !== 0);
-            state.total = Math.round(state.cart.reduce((total, item) => total + (item.price * item.quantity), 0)*100)/100;
+            state.total = roundToTwoDecimals(state.cart.reduce((total, item) => total + (item.price * item.quantity), 0));
             saveState(state);
         },
         clearCart: (state) => {
@@ -66,6 +68,6 @@ const cartSlice = createSlice({
     }
 })
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions
+export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions
 
 export default cartSlice.reducer

@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../redux/slices/cartSlice";
 import CartDropdownItem from "./CartDropdownItem";
+import { roundToTwoDecimals } from "../utils";
 
 const CartDropdown = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
-  const totalWDelivery = Math.round((total + 5)*100)/100;
+  const totalWDelivery = roundToTwoDecimals(total + 5);
   const cartQuantity = cart.length;
 
   const handleRemove = (item) => {
