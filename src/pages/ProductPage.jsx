@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ImageGallery from "react-image-gallery";
 import { useMemo } from "react";
 import { QuantitySelect, AddToCartButton } from "../components";
-import { addToCart } from "../redux/slices/cartSlice";
 
 import { selectProductsWCategories } from "../redux/selectors";
 
 const ProductPage = () => {
-  const dispatch = useDispatch();
   const products = useSelector(selectProductsWCategories);
   const status = useSelector((state) => state.productReducer.status);
   const [quantity, setQuantity] = useState(1);

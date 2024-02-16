@@ -1,7 +1,6 @@
 import SearchBar from "./SearchBar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
   faPhone,
   faEnvelope,
   faAngleDown,
@@ -20,7 +19,7 @@ const NavBar = () => {
       <div className="nav__row nav__top">
         <div className="nav__row-group">
           <div className="nav__row-item">
-            <Link to="/contact">Contact us</Link>
+            <Link to="/contact-us">Contact us</Link>
           </div>
           <div className="nav__row-item-divider"></div>
           <div className="nav__row-item">
@@ -31,19 +30,12 @@ const NavBar = () => {
           </div>
           <div className="nav__row-item-divider"></div>
           <div className="nav__row-item">
-            <a href="mailto:info@honeypot.hr">
+            <a href="mailto:info@honeyshop.hr">
               <FontAwesomeIcon icon={faEnvelope} />
-              info@honeypot.hr
+              info@honeyshop.hr
             </a>
           </div>
         </div>
-        {/* <div className="nav__row-group">
-          <div className="nav__row-item">
-            <Link to="/login"> Login</Link>
-            <FontAwesomeIcon icon={faUser} />
-            <Link to="/register"> Register</Link>
-          </div>
-        </div> */}
       </div>
       <div className="nav__row nav__bottom">
         <div className="nav__row-group">
@@ -90,7 +82,7 @@ const NavBar = () => {
                 <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact-us">Contact</Link>
               </li>
             </ul>
           </div>
