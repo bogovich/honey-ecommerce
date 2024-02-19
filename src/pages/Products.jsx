@@ -29,24 +29,29 @@ const Products = () => {
     dispatch(setNameFilter(search || ""));
   }, [search, dispatch]);
 
+  const initializeFilters = (products, categories, dispatch) => {
+    dispatch(setPackagingFilter(getUniqueValues(products, "packaging")));
+    dispatch(setHoneyTypeFilter(getUniqueValues(products, "honey_type")));
+    dispatch(
+      setCategoryFilter(
+        categories.map((category) => ({
+          ...category,
+          checked: false,
+        }))
+      )
+    );
+    dispatch(
+      setPriceFilter({
+        min: Math.min(...products.map((product) => product.price)),
+        max: Math.max(...products.map((product) => product.price)),
+      })
+    );
+  };
+  
+
   useEffect(() => {
     if (products.length > 0) {
-      dispatch(setPackagingFilter(getUniqueValues(products, "packaging")));
-      dispatch(setHoneyTypeFilter(getUniqueValues(products, "honey_type")));
-      dispatch(
-        setCategoryFilter(
-          categories.map((category) => ({
-            ...category,
-            checked: false,
-          }))
-        )
-      );
-      dispatch(
-        setPriceFilter({
-          min: Math.min(...products.map((product) => product.price)),
-          max: Math.max(...products.map((product) => product.price)),
-        })
-      );
+      initializeFilters(products, categories, dispatch);
     }
   }, [products, categories, dispatch]);
 
@@ -77,6 +82,10 @@ const Products = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const clearFilters = () => {
+    initializeFilters(products, categories, dispatch);
+  };
+
   const handlePackagingFilterChange = (newFilter) => {
     dispatch(setPackagingFilter(newFilter));
   };
@@ -93,6 +102,9 @@ const Products = () => {
     <section className="products-section">
       <div className="filters">
         <h1>Filters</h1>
+        <button onClick={clearFilters} className="btn-secondary filters__btn-clear">
+          Clear Filters
+        </button>
         <FilterForm
           filter={filters.packaging}
           setFilter={handlePackagingFilterChange}
@@ -111,6 +123,7 @@ const Products = () => {
           />
         )}
       </div>
+
       <div className="products">
         {filteredProducts.map((filteredProduct) => {
           return (
