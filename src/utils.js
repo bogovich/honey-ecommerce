@@ -24,6 +24,6 @@ const slugify = (str) => {
     .replace(/-+/g, "-");
 };
 
-const roundToTwoDecimals = (num) => Math.round(num * 100) / 100;
+const roundToTwoDecimals = (num) => Math.round((num + Number.EPSILON) * 100) / 100;
 
 export { getUniqueValues, getTruthyValuesFromObject, slugify, roundToTwoDecimals };
