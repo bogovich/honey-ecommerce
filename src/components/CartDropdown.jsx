@@ -11,7 +11,7 @@ const CartDropdown = () => {
   const cart = useSelector((state) => state.cartReducer.cart);
   const total = useSelector((state) => state.cartReducer.total);
   const totalWDelivery = roundToTwoDecimals(total + 5);
-  const cartQuantity = cart.length;
+  const cartQuantity = cart.reduce((total, item) => total + item.quantity, 0);
 
   const handleRemove = (item) => {
     dispatch(removeFromCart(item));
