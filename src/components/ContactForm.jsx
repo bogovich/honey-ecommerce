@@ -3,9 +3,10 @@ import {
   faSpinner,
   faCheckCircle,
 } from "@fortawesome/free-solid-svg-icons";
+import PropTypes from "prop-types";
 
 
-const ContactForm = () => {
+const ContactForm = ({ formData, handleChange, handleSubmit, sending, sent, formRef }) => {
   return (
     <form
       ref={formRef}
@@ -85,6 +86,15 @@ const ContactForm = () => {
       )}
     </form>
   );
+};
+
+ContactForm.propTypes = {
+  formData: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  sending: PropTypes.bool.isRequired,
+  sent: PropTypes.bool.isRequired,
+  formRef: PropTypes.object.isRequired,
 };
 
 export default ContactForm;

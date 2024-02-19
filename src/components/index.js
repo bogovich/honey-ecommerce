@@ -15,3 +15,5 @@ export { default as ShippingDetails } from './ShippingDetails';
 export { default as PaymentDetails } from './PaymentDetails';
 export { default as OrderOverview } from './OrderOverview';
 export { default as OrderConfirmation } from './OrderConfirmation';
+export { default as ContactForm } from './ContactForm';
+export { default as ContactInfo } from './ContactInfo';
