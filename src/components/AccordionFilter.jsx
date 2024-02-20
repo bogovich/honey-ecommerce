@@ -1,5 +1,5 @@
 import Accordion from "@mui/material/Accordion";
-import { styled } from "@mui/material/styles";
+import { styled } from "@mui/system";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

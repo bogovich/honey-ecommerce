@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore/lite';
+import { collection, getDocs, query } from 'firebase/firestore/lite';
 import {db} from '../../firebase';
 
 const getCategoryData = async () => {
