@@ -9,7 +9,11 @@ import { Link } from "react-router-dom";
 import CartDropdown from "./CartDropdown";
 import { useSelector } from "react-redux";
 import { slugify } from "../utils";
-import "./NavBar.css"
+import "./NavBar.css";
+import HamburgerMenu from "./HamburgerMenu";
+import SearchBarMobile from "./SearchBarMobile";
+
+
 
 const NavBar = () => {
   const categories = useSelector((state) => state.categoryReducer.categories);
@@ -69,18 +73,18 @@ const NavBar = () => {
               icon={faAngleDown}
             />
             <ul className="nav__dropdown">
-              <li>
+              {/* <li>
                 <Link to="/about-us">About us</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/about-area">About our area</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to="/delivery">Delivery</Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link to="/faq">FAQ</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to="/contact-us">Contact</Link>
               </li>
@@ -91,6 +95,17 @@ const NavBar = () => {
           <SearchBar />
         </div>
         <div className="nav__row-group">
+          <CartDropdown />
+        </div>
+        <div className="nav__mobile-group">
+          <Link to="/" className="nav__logo" alt="logo"></Link>
+          <HamburgerMenu
+          categories={categories}
+        />
+        </div>
+
+        <div className="nav__mobile-group">
+          <SearchBarMobile />
           <CartDropdown />
         </div>
       </div>

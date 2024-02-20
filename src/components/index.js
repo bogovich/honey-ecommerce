@@ -17,3 +17,5 @@ export { default as OrderOverview } from './OrderOverview';
 export { default as OrderConfirmation } from './OrderConfirmation';
 export { default as ContactForm } from './ContactForm';
 export { default as ContactInfo } from './ContactInfo';
+export { default as HamburgerMenu } from './HamburgerMenu';
+export { default as SearchBarMobile } from './SearchBarMobile';
