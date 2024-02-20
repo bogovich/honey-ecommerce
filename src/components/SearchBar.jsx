@@ -3,12 +3,10 @@ import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { selectProductsWCategories } from "../redux/selectors";
-import { useNavigate } from "react-router-dom";
-import SearchDropdownItem from "./SearchDropdownItem";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useRef } from "react";
+import { useSearch } from "../hooks/useSearch";
+import SearchResults from "./SearchResults";
 
 const StyledInputAdornment = styled(InputAdornment)({
   position: "absolute",
@@ -48,6 +46,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
+      width: "250px",
+    },
+    [theme.breakpoints.up("lg")]: {
       width: "350px",
     },
   },
@@ -70,68 +71,17 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const SearchBar = () => {
-  const navigate = useNavigate();
-  const [searchTerm, setSearchTerm] = useState("");
-  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const products = useSelector(selectProductsWCategories);
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      setDebouncedSearchTerm(searchTerm);
-    }, 500);
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [searchTerm]);
+  const {
+    searchTerm,
+    searchResults,
+    handleSearchChange,
+    handleSearchSubmit,
+    handleKeySearch,
+    handleClose
+  } = useSearch();
 
-  useEffect(() => {
-    if (debouncedSearchTerm.length > 1) {
-      const results = products.filter((product) =>
-        product.title.en
-          .toLowerCase()
-          .includes(debouncedSearchTerm.toLowerCase())
-      );
-      setSearchResults(results);
-    } else {
-      setSearchResults([]);
-    }
-  }, [debouncedSearchTerm, products]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setSearchResults([]);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchSubmit = () => {
-    setSearchTerm("");
-    navigate(`/products/search?name=${searchTerm}`);
-  };
-
-  const handleKeySearch = (event) => {
-    if (event.key === "Enter") {
-      setSearchTerm("");
-      navigate(`/products/search?name=${searchTerm}`);
-    }
-  };
-
-  const handleClose = () => {
-    setSearchTerm("");
-    setSearchResults([]);
-  }
 
   return (
     <Search>
@@ -156,18 +106,7 @@ const SearchBar = () => {
           </StyledInputAdornment>
         }
       />
-      {searchResults.length > 0 && (
-        <>
-          <div className="nav__search-dropdown" ref={dropdownRef}>
-            {searchResults.map((result) => (
-              <SearchDropdownItem key={result.id} item={result} />
-            ))}
-          </div>
-          <span className="nav__search-dropdown__close" onClick={handleClose}>
-            <FontAwesomeIcon icon={faXmark} size="lg" />
-          </span>
-        </>
-      )}
+      <SearchResults searchResults={searchResults} dropdownRef={dropdownRef} handleClose={handleClose}/>
     </Search>
   );
 };
