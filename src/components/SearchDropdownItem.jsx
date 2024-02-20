@@ -37,7 +37,6 @@ const SearchDropdownItem = ({ item }) => {
 
 SearchDropdownItem.propTypes = {
   item: PropTypes.object.isRequired,
-  handleRemove: PropTypes.func.isRequired,
 };
 
 export default SearchDropdownItem;
