@@ -43,7 +43,11 @@ const Cart = () => {
 
         </>
       ) : (
-        <p className="cart__empty">Your cart is empty</p>
+        <div className="cart__empty">
+          <p className="cart__empty-title">Your cart is empty</p>
+          <p className="cart__empty-info">Please check out our products.</p>
+          <Link className="cart__empty-btn btn-primary" to="/products">Products</Link>
+        </div>
       )}
     </section>
   );
