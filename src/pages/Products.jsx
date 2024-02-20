@@ -14,6 +14,9 @@ import {
 } from "../redux/slices/filterSlice";
 import { getUniqueValues, slugify } from "../utils";
 import { Product, FilterForm, FilterCategoryForm } from "../components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -23,7 +26,16 @@ const Products = () => {
   const categories = useSelector((state) => state.categoryReducer.categories);
   const { categorySlug } = useParams();
   const [searchParams] = useSearchParams();
+  const [showFilters, setShowFilters] = useState(false);
   const search = searchParams.get("name");
+
+  useEffect(() => {
+    if (showFilters) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "visible";
+    }
+  }, [showFilters]);
 
   useEffect(() => {
     dispatch(setNameFilter(search || ""));
@@ -100,8 +112,17 @@ const Products = () => {
 
   return (
     <section className="products-section">
-      <div className="filters">
+      <div className="filter-btn">
+        <button className="btn-primary" onClick={() => {setShowFilters((prev) => !prev)}}>
+          <FontAwesomeIcon icon={faFilter} />
+          Filters
+          </button>
+      </div>
+      <div className={`filters ${showFilters && 'active'}`}>
         <h1>Filters</h1>
+        <div onClick={() => {setShowFilters((prev) => !prev)}} className="filters__btn-close">
+          <FontAwesomeIcon icon={faX} className="filters__btn-close-icon"/>
+        </div>
         <button onClick={clearFilters} className="btn-secondary filters__btn-clear">
           Clear Filters
         </button>
@@ -123,8 +144,8 @@ const Products = () => {
           />
         )}
       </div>
-
       <div className="products">
+        
         {filteredProducts.map((filteredProduct) => {
           return (
             <Product
