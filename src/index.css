@@ -27,7 +27,7 @@ body:has(.nav__mobile-menu.active) {
   overflow: hidden;
 }
 
-@media (max-width: 1230px) {
+@media (max-width: 1300px) {
   :root {
     --site-padding: 5vw;
   }
