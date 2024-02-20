@@ -10,7 +10,8 @@ import {
   Register,
   NotFound,
   Checkout,
-  ProductPage
+  ProductPage,
+  AboutArea
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact-us" element={<Contact />} />
+          <Route path="/about-our-area" element={<AboutArea />} />
           <Route
             path="/products/:categorySlug/:productSlugAndId"
             element={<ProductPage />}

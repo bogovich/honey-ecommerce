@@ -7,3 +7,4 @@ export { default as Register } from './Register';
 export { default as NotFound } from './NotFound';
 export { default as ProductPage } from './ProductPage';
 export { default as Checkout } from './Checkout';
+export { default as AboutArea } from './AboutArea';

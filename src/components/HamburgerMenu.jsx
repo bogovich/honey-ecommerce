@@ -109,7 +109,7 @@ const HamburgerMenu = ({ categories }) => {
             }`}
           >
             <li>
-              <Link to="/about-area" onClick={handleLinkClick}>
+              <Link to="/about-our-area" onClick={handleLinkClick}>
                 About our area
               </Link>
             </li>
