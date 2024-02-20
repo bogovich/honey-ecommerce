@@ -1107,6 +1107,10 @@
     flex-direction: column;
   }
 
+  .cart__title {
+    font-size: 1.75rem;
+  }
+
   .cart__content {
     width: 100%;
   }
@@ -1209,6 +1213,64 @@
     top: 2px;
     left: 1px;
   }
+
+  .product-page__data {
+    gap: 1rem;
+  }
+
+  .product-page .image-gallery {
+    width: 50%;
+    height: 400px;
+  }
+  
+  .product-page .image-gallery .image-gallery-slide img {
+    height: 300px ;
+  }
+  
+  .product-page .image-gallery .image-gallery-svg {
+    height: 70px ;
+    width: 60px ;
+  }
+  
+  .product-page .image-gallery .image-gallery-thumbnail {
+    width: 80px;
+  }
+  
+  .product-page .image-gallery .image-gallery-thumbnail-image {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .image-gallery-icon {
+    font-size: 1rem;
+  }
+
+  .product-page__info {
+    width: 50%;
+    gap: 0.75rem;
+  }
+
+  .product-page__title {
+    font-size: 1.5rem;
+  }
+
+  .product-page__data-points {
+    gap: 0.5rem;
+  }
+
+  .product-page__price {
+    font-size: 1.45rem;
+  }
+
+  .product-page .product__add-btn {
+    width: 75%;
+    font-size: 1.1rem;
+    height: 40px;
+  }
+
+  .product-page .quantity-select {
+    height: 40px;
+  }
 }
 
 @media (max-width: 732px) {
@@ -1281,6 +1343,9 @@
     height: 58px;
   }
 
+  .cart__title {
+    font-size: 1.5rem;
+  } 
 
   .cart__item-img {
     height: 60px;
@@ -1354,5 +1419,52 @@
   .filter-btn .btn-primary {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .product-page__data {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .product-page .image-gallery {
+    width: 100%;
+    height: 260px;
+  }
+  
+  .product-page .image-gallery .image-gallery-slide img {
+    height: 200px ;
+  }
+  
+  .product-page .image-gallery .image-gallery-thumbnail {
+    width: 60px;
+  }
+  
+  .product-page .image-gallery .image-gallery-thumbnail-image {
+    width: 60px;
+    height: 60px;
+  }
+
+  .product-page__info {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .product-page__price {
+    align-self: center;
+  }
+
+  .product-page .product__add-btn {
+    width: 75%;
+    font-size: 1.1rem;
+    height: 40px;
+  }
+
+  .product-page .quantity-select {
+    width: 25%;
+    height: 40px;
+  }
+
+  .product-page__actions {
+    justify-content: center;
   }
 }
