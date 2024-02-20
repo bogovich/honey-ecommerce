@@ -1093,6 +1093,31 @@
 }
 
 @media (max-width: 550px) {
+
+  .nav__mobile-group.nav__logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .nav__mobile-group .nav__cart {
+    height: 36px;
+    width: 55px;
+  }
+
+  .nav__mobile-group .nav__cart-link {
+    font-size: 0.9rem;
+    padding: 9px 1.1rem;
+  }
+
+  .nav__mobile-group .mobile-search {
+    height: 36px;
+    width: 55px;
+  }
+  .mobile-search__input {
+    height: 58px;
+  }
+
+
   .cart__item-img {
     height: 60px;
     width: 40px;
