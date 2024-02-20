@@ -26,7 +26,6 @@ const OrderOverview = ({ formData, prevStep, nextStep }) => {
 
   const shipping_type =
     formData.shippingDetails.shippingType === "postal" ? "Postal" : "Pickup";
-  console.log("123412341234123".replace(/\d(?=\d{4})/g, "*"));
 
   const handleProcess = () => {
     setProcessing(true);

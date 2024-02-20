@@ -27,8 +27,6 @@ const CheckoutPage = () => {
     cart: {},
   });
 
-  console.log(formData);
-
   useEffect(() => {
     setFormData((prevState) => ({ ...prevState, cart: cart }));
   }, [cart]);

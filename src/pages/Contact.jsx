@@ -28,7 +28,6 @@ const ContactPage = () => {
           }
       }, 5500);
     }, 1200);
-    console.log(formData);
   };
   const handleChange = (event) => {
     const { name, value } = event.target;
