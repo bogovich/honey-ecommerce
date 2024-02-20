@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import {
   selectProductsWCategories,
   selectFilteredProducts,
@@ -13,7 +13,12 @@ import {
   setNameFilter,
 } from "../redux/slices/filterSlice";
 import { getUniqueValues, slugify } from "../utils";
-import { Product, FilterForm, FilterCategoryForm } from "../components";
+import {
+  Product,
+  FilterForm,
+  FilterCategoryForm,
+  FilterPriceForm,
+} from "../components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -28,6 +33,13 @@ const Products = () => {
   const [searchParams] = useSearchParams();
   const [showFilters, setShowFilters] = useState(false);
   const search = searchParams.get("name");
+
+  const priceRange = useMemo(() => {
+    return {
+      min: Math.min(...products.map((product) => product.price)),
+      max: Math.max(...products.map((product) => product.price)),
+    };
+  }, [products]);
 
   useEffect(() => {
     if (showFilters) {
@@ -59,7 +71,6 @@ const Products = () => {
       })
     );
   };
-  
 
   useEffect(() => {
     if (products.length > 0) {
@@ -87,7 +98,6 @@ const Products = () => {
         )
       );
     }
-
   }, [categorySlug, categories, dispatch]);
 
   useEffect(() => {
@@ -110,22 +120,52 @@ const Products = () => {
     dispatch(setCategoryFilter(newFilter));
   };
 
+  const handlePriceFilterChange = (newFilter) => {
+    dispatch(setPriceFilter(newFilter));
+  };
+
   return (
     <section className="products-section">
       <div className="filter-btn">
-        <button className="btn-primary" onClick={() => {setShowFilters((prev) => !prev)}}>
+        <button
+          className="btn-primary"
+          onClick={() => {
+            setShowFilters((prev) => !prev);
+          }}
+        >
           <FontAwesomeIcon icon={faFilter} />
           Filters
-          </button>
+        </button>
       </div>
-      <div className={`filters ${showFilters && 'active'}`}>
+      <div className={`filters ${showFilters && "active"}`}>
         <h1>Filters</h1>
-        <div onClick={() => {setShowFilters((prev) => !prev)}} className="filters__btn-close">
-          <FontAwesomeIcon icon={faX} className="filters__btn-close-icon"/>
+        <div
+          onClick={() => {
+            setShowFilters((prev) => !prev);
+          }}
+          className="filters__btn-close"
+        >
+          <FontAwesomeIcon icon={faX} className="filters__btn-close-icon" />
         </div>
-        <button onClick={clearFilters} className="btn-secondary filters__btn-clear">
+        <button
+          onClick={clearFilters}
+          className="btn-secondary filters__btn-clear"
+        >
           Clear Filters
         </button>
+        <FilterPriceForm
+          filter={filters.price}
+          setFilter={handlePriceFilterChange}
+          title="Price"
+          priceRange={priceRange}
+        />
+        {!categorySlug && (
+          <FilterCategoryForm
+            filter={filters.category}
+            setFilter={handleCategoryFilterChange}
+            title="Category"
+          />
+        )}
         <FilterForm
           filter={filters.packaging}
           setFilter={handlePackagingFilterChange}
@@ -136,23 +176,10 @@ const Products = () => {
           setFilter={handleHoneyTypeFilterChange}
           title="Honey Type"
         />
-        {!categorySlug && (
-          <FilterCategoryForm
-            filter={filters.category}
-            setFilter={handleCategoryFilterChange}
-            title="Category"
-          />
-        )}
       </div>
       <div className="products">
-        
         {filteredProducts.map((filteredProduct) => {
-          return (
-            <Product
-              key={filteredProduct.id}
-              product={filteredProduct}
-            />
-          );
+          return <Product key={filteredProduct.id} product={filteredProduct} />;
         })}
       </div>
     </section>
