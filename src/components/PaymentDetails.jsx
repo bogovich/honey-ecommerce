@@ -28,7 +28,7 @@ const PaymentDetails = ({ formData, updateFormData, prevStep, nextStep }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="payment__form" onSubmit={handleSubmit}>
       <div className="checkout__form-btn-row">
         <h2>Payment Details (simulated)</h2>
         <button type="button" onClick={fillFakeData} className="btn-fake">
