@@ -16,6 +16,7 @@
   -moz-osx-font-smoothing: grayscale;
 
   --nav-height: 90px;
+  --footer-height: 30px;
   --site-padding: 10vw;
   --color-text: #e7e5e5;
   --primary-orange: #ff7b00;

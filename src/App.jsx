@@ -10,13 +10,13 @@ import {
   Register,
   NotFound,
   Checkout,
+  ProductPage
 } from "./pages";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/slices/productSlice";
 import { fetchCategories } from "./redux/slices/categorySlice";
-import ProductPage from "./pages/ProductPage";
-import Breadcrumbs from "./components/Breadcrumbs";
+import {Breadcrumbs, Footer } from "./components";
 function App() {
   const dispatch = useDispatch();
 
@@ -48,6 +48,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }

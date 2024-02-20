@@ -19,3 +19,5 @@ export { default as ContactForm } from './ContactForm';
 export { default as ContactInfo } from './ContactInfo';
 export { default as HamburgerMenu } from './HamburgerMenu';
 export { default as SearchBarMobile } from './SearchBarMobile';
+export { default as Breadcrumbs } from './Breadcrumbs';
+export { default as Footer } from './Footer';
