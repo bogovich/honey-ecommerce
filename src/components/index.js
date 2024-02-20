@@ -21,3 +21,5 @@ export { default as HamburgerMenu } from './HamburgerMenu';
 export { default as SearchBarMobile } from './SearchBarMobile';
 export { default as Breadcrumbs } from './Breadcrumbs';
 export { default as Footer } from './Footer';
+export { default as FilterPriceForm } from './FilterPriceForm';
+export { default as AccordionFilter } from './AccordionFilter';
