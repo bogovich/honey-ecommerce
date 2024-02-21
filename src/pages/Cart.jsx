@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { CartItem } from "../components";
+import CartItem from "../components/CartItem";
 import { Link } from "react-router-dom";
 import { roundToTwoDecimals } from "../utils";
 import { TAX_RATE, DELIVERY_COST } from "../constants";

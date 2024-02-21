@@ -13,12 +13,10 @@ import {
   setNameFilter,
 } from "../redux/slices/filterSlice";
 import { getUniqueValues, slugify } from "../utils";
-import {
-  Product,
-  FilterForm,
-  FilterCategoryForm,
-  FilterPriceForm,
-} from "../components";
+import Product from "../components/Product";
+import FilterForm from "../components/FilterForm";
+import FilterCategoryForm from "../components/FilterCategoryForm";
+import FilterPriceForm from "../components/FilterPriceForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";

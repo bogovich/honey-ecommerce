@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { CheckoutSteps } from "../components";
-import { ShippingDetails, PaymentDetails, OrderOverview, OrderConfirmation } from "../components";
+import ShippingDetails from "../components/ShippingDetails";
+import PaymentDetails from "../components/PaymentDetails";
+import OrderOverview from "../components/OrderOverview";
+import OrderConfirmation from "../components/OrderConfirmation";
+import CheckoutSteps from "../components/CheckoutSteps";
 
 const CheckoutPage = () => {
   const [step, setStep] = useState(1);

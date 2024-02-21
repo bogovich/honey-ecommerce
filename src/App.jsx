@@ -1,18 +1,18 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import {
   Landing,
-  Cart,
   Contact,
-  Products,
   Login,
   Register,
   NotFound,
-  Checkout,
-  ProductPage,
   AboutArea
 } from "./pages";
+const Checkout = lazy(() => import("./pages/Checkout"));
+const ProductPage = lazy(() => import("./pages/ProductPage"));
+const Products = lazy(() => import("./pages/Products"));
+const Cart = lazy(() => import("./pages/Cart"));
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchProducts } from "./redux/slices/productSlice";
@@ -34,17 +34,17 @@ function App() {
         <Breadcrumbs />
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/contact-us" element={<Contact />} />
           <Route path="/about-our-area" element={<AboutArea />} />
           <Route
             path="/products/:categorySlug/:productSlugAndId"
-            element={<ProductPage />}
+            element={<LazyProductPage />}
           />
           <Route path="/products/:categorySlug" element={<Products />} />
-          <Route path="/products/" element={<Products />} />
+          <Route path="/products/" element={<ProductsPage />} />
           <Route path="/products/search" element={<Products />} />
-          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
@@ -55,4 +55,27 @@ function App() {
   );
 }
 
+const CheckoutPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Checkout />
+  </Suspense>
+);
+
+const LazyProductPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ProductPage />
+  </Suspense>
+);
+
+const ProductsPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Products />
+  </Suspense>
+);
+
+const CartPage = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <Cart />
+  </Suspense>
+);
 export default App;
