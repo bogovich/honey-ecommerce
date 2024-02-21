@@ -68,7 +68,7 @@ const SearchBarMobile = () => {
             <SearchResults
                 searchResults={searchResults}
                 dropdownRef={dropdownRef}
-                handleClose={handleClose}
+                handleClose={handleMobileClose}
             />
         </div>
       </div>

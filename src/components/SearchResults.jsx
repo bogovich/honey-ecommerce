@@ -11,7 +11,7 @@ const SearchResults = ({searchResults, dropdownRef, handleClose}) => {
             <>
               <div className="nav__search-dropdown" ref={dropdownRef}>
                 {searchResults.map((result) => (
-                  <SearchDropdownItem key={result.id} item={result} />
+                  <SearchDropdownItem key={result.id} item={result} handleClose={handleClose}/>
                 ))}
               </div>
               <span className="nav__search-dropdown__close" onClick={handleClose}>

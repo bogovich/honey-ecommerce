@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { useSearch } from "../hooks/useSearch";
 import SearchResults from "./SearchResults";
 
@@ -81,6 +81,19 @@ const SearchBar = () => {
     handleKeySearch,
     handleClose
   } = useSearch();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [handleClose]);
 
 
   return (
