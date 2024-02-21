@@ -19,7 +19,7 @@ import FilterCategoryForm from "../components/FilterCategoryForm";
 import FilterPriceForm from "../components/FilterPriceForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter, faX } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useShowOverlay } from "../hooks/useShowOverlay";
 
 const Products = () => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Products = () => {
   const categories = useSelector((state) => state.categoryReducer.categories);
   const { categorySlug } = useParams();
   const [searchParams] = useSearchParams();
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useShowOverlay();
   const search = searchParams.get("name");
 
   const priceRange = useMemo(() => {
@@ -38,14 +38,6 @@ const Products = () => {
       max: Math.max(...products.map((product) => product.price)),
     };
   }, [products]);
-
-  useEffect(() => {
-    if (showFilters) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "visible";
-    }
-  }, [showFilters]);
 
   useEffect(() => {
     dispatch(setNameFilter(search || ""));

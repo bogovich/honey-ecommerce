@@ -3,21 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown} from "@fortawesome/free-solid-svg-icons";
 import { slugify } from "../utils";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useShowOverlay } from "../hooks/useShowOverlay";
 import ContactInfo from "./ContactInfo";
 
 
 const HamburgerMenu = ({ categories }) => {
 
-  const [showHamburger, setShowHamburger] = useState(false);
-
-  useEffect(() => {
-    if (showHamburger) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "visible";
-    }
-  }, [showHamburger]);
+  const [showHamburger, setShowHamburger] = useShowOverlay(false);
   const [openSubmenus, setOpenSubmenus] = useState({
     products: false,
     information: true,
