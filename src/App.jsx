@@ -9,6 +9,7 @@ import {
   NotFound,
   AboutArea
 } from "./pages";
+import Loading from "./components/Loading";
 const Checkout = lazy(() => import("./pages/Checkout"));
 const ProductPage = lazy(() => import("./pages/ProductPage"));
 const Products = lazy(() => import("./pages/Products"));
@@ -56,25 +57,25 @@ function App() {
 }
 
 const CheckoutPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<Loading />}>
     <Checkout />
   </Suspense>
 );
 
 const LazyProductPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<Loading />}>
     <ProductPage />
   </Suspense>
 );
 
 const ProductsPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<Loading />}>
     <Products />
   </Suspense>
 );
 
 const CartPage = () => (
-  <Suspense fallback={<div>Loading...</div>}>
+  <Suspense fallback={<Loading />}>
     <Cart />
   </Suspense>
 );
