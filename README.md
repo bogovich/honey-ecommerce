@@ -11,6 +11,7 @@ This project is a mock responsive e-commerce application built with React, Redux
 - Material UI for component styling.
 - Font Awesome icons.
 - Product Filtering: Allows users to filter products based on price, category, honey type, and packaging type.
+- Route-based lazy loading with Suspense for components which are not needed when first loading the site
 
 ## Pages
 
