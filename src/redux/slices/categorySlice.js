@@ -1,25 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { collection, getDocs, query } from 'firebase/firestore/lite';
-import {db} from '../../firebase';
-
-const getCategoryData = async () => {
-    const q = query(collection(db, "categories"));
-    const data = await getDocs(q);
-    const categoriesArray = await Promise.all(data.docs.map(async (doc) => {
-        return {
-            id: doc.id,
-            ...doc.data()
-        }
-    }));
-    return categoriesArray;
-}
 
 export const fetchCategories = createAsyncThunk(
     'categories/fetchCategories',
     async () => {
       try {
-        const response = await getCategoryData();
-        return response;
+        const response = await fetch('/api/categories');
+        const data = await response.json();
+        return data;
       } catch (error) {
         throw Error(error);
       }
