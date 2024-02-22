@@ -58,6 +58,7 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   padding: 0 1rem;
+  position: relative;
 }
 
 .products-section .products {
