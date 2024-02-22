@@ -1,4 +1,4 @@
-import db from '../firebaseInit';
+import db from './firebaseInit';
 import { collection, getDocs } from 'firebase/firestore/lite';
 export default async (req, res) => {
     if (req.method === 'GET') {
