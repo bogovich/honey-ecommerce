@@ -7,7 +7,6 @@ import Loading from "../components/Loading";
 const Landing = () => {
   const featuredProducts = useSelector(selectFeaturedProducts);
   const status = useSelector((state) => state.productReducer.status);
-  console.log(status);
 
   if (!featuredProducts) {
     return <h1> Loading </h1>;
