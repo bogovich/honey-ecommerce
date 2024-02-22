@@ -35,7 +35,7 @@ npm run dev
 
 ## Usage
 
-Visit the live demo at or follow the installation instructions above to run the app locally. 
+Visit the live demo at [https://honey-ecommerce.vercel.app/](https://honey-ecommerce.vercel.app/). 
 
 ## Mock
 
