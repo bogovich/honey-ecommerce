@@ -64,7 +64,7 @@ const OrderOverview = ({ formData, prevStep, nextStep }) => {
             <span>Total tax({TAX_RATE * 100}%):</span>
             <span>{totalTax}€</span>
             <span>Total w/o delivery:</span>
-            <span>{total}€</span>
+            <span>{roundToTwoDecimals(total)}€</span>
             <span>Delivery:</span>
             <span>{finalDeliveryCost.toFixed(2)}€</span>
             <span>
