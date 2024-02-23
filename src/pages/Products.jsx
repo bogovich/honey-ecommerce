@@ -168,9 +168,21 @@ const Products = () => {
         />
       </div>
       <div className="products">
-        {filteredProducts.map((filteredProduct) => {
-          return <Product key={filteredProduct.id} product={filteredProduct} />;
-        })}
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((filteredProduct) => {
+            return (
+              <Product key={filteredProduct.id} product={filteredProduct} />
+            );
+          })
+        ) : (
+          <div className="products__not-found">
+            <h2 className="products__not-found-title">No products found</h2>
+            <p className="products__not-found-text">
+              We couldn&apos;t find any products matching your search. 
+              Please try a different search term or clear the filters.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

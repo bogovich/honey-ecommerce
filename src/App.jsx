@@ -42,7 +42,7 @@ function App() {
             path="/products/:categorySlug/:productSlugAndId"
             element={<LazyProductPage />}
           />
-          <Route path="/products/:categorySlug" element={<Products />} />
+          <Route path="/products/:categorySlug" element={<ProductsPage />} />
           <Route path="/products/" element={<ProductsPage />} />
           <Route path="/products/search" element={<Products />} />
           <Route path="/checkout" element={<CheckoutPage />} />
