@@ -44,7 +44,7 @@ function App() {
           />
           <Route path="/products/:categorySlug" element={<ProductsPage />} />
           <Route path="/products/" element={<ProductsPage />} />
-          <Route path="/products/search" element={<Products />} />
+          <Route path="/products/search" element={<ProductsPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
